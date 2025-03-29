@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="seekbar_red" type="id" />
+    <item name="seekbar_green" type="id" />
+    <item name="seekbar_blue" type="id" />
+    <item name="seekbar_alpha" type="id" />
+    <item name="color_preview" type="id" />
+    <item name="button_apply" type="id" />
+</resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Fill color using the app's primary color -->
+    <solid android:color="@color/purple_500" />
+
+    <!-- Rounded corners -->
+    <corners android:radius="8dp" />
+
+    <!-- Optional gradient effect -->
+    <gradient
+        android:startColor="@color/purple_500"
+        android:endColor="@color/purple_700"
+        android:angle="270" />
+</shape>

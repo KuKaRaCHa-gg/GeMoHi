@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ui_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MapsActivity">
+
+    <!-- Google Maps Fragment -->
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Top Information Container - Floating card with blur effect -->
+    <LinearLayout
+        android:id="@+id/top_info_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/rounded_card_background_dark"
+        android:elevation="10dp"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:alpha="0.92"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- App Title with Icon -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="12dp">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/ic_coin"
+                android:layout_marginEnd="8dp"
+                app:tint="#FFD700" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="GeoMoneyHide"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.05"/>
+        </LinearLayout>
+
+        <!-- Information Cards -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Surface Discovered Card -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:background="@drawable/rounded_info_card"
+                android:backgroundTint="#173F23"
+                android:padding="12dp"
+                android:layout_marginEnd="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Surface découverte"
+                    android:textColor="#4CAF50"
+                    android:textStyle="bold"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/surface_discovered"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0 km² (0.00%)"
+                    android:textColor="#E0E0E0"
+                    android:textSize="14sp"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+
+            <!-- Coins Collected Card -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:background="@drawable/rounded_info_card"
+                android:backgroundTint="#3E371E"
+                android:padding="12dp"
+                android:layout_marginStart="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pièces collectées"
+                    android:textColor="#FFD700"
+                    android:textStyle="bold"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/coins_collected"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="#E0E0E0"
+                    android:textSize="14sp"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Bottom Action Buttons - Floating with glass effect -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/bottom_button_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="12dp"
+        app:cardBackgroundColor="#66000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="8dp">
+
+            <!-- Color Change Button - Material design style -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/change_color_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="6dp"
+                android:paddingVertical="12dp"
+                app:icon="@drawable/ic_color"
+                app:iconGravity="top"
+                app:iconSize="24dp"
+                app:iconTint="#E040FB"
+                android:text="Couleur"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                app:cornerRadius="16dp"
+                app:backgroundTint="#3A1046"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"/>
+
+            <!-- Rules Button - Material design style -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/rules_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="6dp"
+                android:paddingVertical="12dp"
+                app:icon="@drawable/ic_rules"
+                app:iconGravity="top"
+                app:iconSize="24dp"
+                app:iconTint="#64B5F6"
+                android:text="Règles"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                app:cornerRadius="16dp"
+                app:backgroundTint="#0D47A1"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"/>
+
+            <!-- Credits Button - Material design style -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/credits_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="6dp"
+                android:paddingVertical="12dp"
+                app:icon="@drawable/ic_info"
+                app:iconGravity="top"
+                app:iconSize="24dp"
+                app:iconTint="#FFAB91"
+                android:text="Crédits"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                app:cornerRadius="16dp"
+                app:backgroundTint="#7A2517"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"/>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Floating Action Button for quick action -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_explore"
+        app:backgroundTint="#4CAF50"
+        app:tint="#FFFFFF"
+        app:fabSize="normal"
+        app:borderWidth="0dp"
+        app:layout_constraintBottom_toTopOf="@id/bottom_button_container"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
