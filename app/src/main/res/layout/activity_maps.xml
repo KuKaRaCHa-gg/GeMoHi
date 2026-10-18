@@ -98,10 +98,12 @@
                     android:background="@drawable/bg_coin_pill"
                     android:focusable="true"
                     android:gravity="center_vertical"
-                    android:minHeight="44dp"
+                    android:minHeight="48dp"
                     android:orientation="horizontal"
                     android:paddingStart="@dimen/space_s"
-                    android:paddingEnd="@dimen/space_m">
+                    android:paddingTop="@dimen/space_xs"
+                    android:paddingEnd="@dimen/space_m"
+                    android:paddingBottom="@dimen/space_xs">
 
                     <ImageView
                         android:id="@+id/hud_coin_icon"
@@ -110,17 +112,32 @@
                         android:importantForAccessibility="no"
                         android:src="@drawable/ic_coin_gold" />
 
-                    <TextView
-                        android:id="@+id/hud_coins"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/space_s"
-                        android:fontFeatureSettings="tnum"
-                        android:importantForAccessibility="no"
-                        android:minWidth="20dp"
-                        android:text="0"
-                        android:textAppearance="@style/TextAppearance.GeoMoneyHide.CoinCounter"
-                        tools:ignore="HardcodedText" />
+                        android:importantForAccessibility="noHideDescendants"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/hud_coins"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFeatureSettings="tnum"
+                            android:includeFontPadding="false"
+                            android:minWidth="20dp"
+                            android:text="0"
+                            android:textAppearance="@style/TextAppearance.GeoMoneyHide.CoinCounter"
+                            tools:ignore="HardcodedText" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:includeFontPadding="false"
+                            android:text="@string/hud_coins_label"
+                            android:textAppearance="@style/TextAppearance.GeoMoneyHide.StatLabel"
+                            android:textColor="@color/gold_300" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 

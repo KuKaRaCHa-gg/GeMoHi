@@ -7,24 +7,17 @@
     <string name="hud_subtitle">Explorateur de trésors</string>
     <string name="hud_logo_desc">Logo GeoMoneyHide</string>
     <string name="hud_coins_label">Pièces</string>
-    <string name="hud_surface_label">Surface explorée</string>
     <string name="hud_cells_label">Zones</string>
     <!-- %1$s = surface déjà formatée (ex. « 12,5 ») -->
     <string name="hud_surface_value">%1$s\u00A0km²</string>
     <!-- %1$s = pourcentage déjà formaté (ex. « 0,000 002 ») -->
     <string name="hud_earth_percent">%1$s\u00A0%% de la Terre</string>
-    <string name="hud_icon_coins_desc">Pièces collectées</string>
     <string name="hud_icon_surface_desc">Surface explorée</string>
     <string name="hud_icon_cells_desc">Zones explorées</string>
     <string name="hud_surface_a11y">Surface explorée : %1$s\u00A0km², soit %2$s\u00A0%% de la surface de la Terre</string>
     <!-- Bulle animée « +N » -->
     <string name="coin_gain">+%1$d</string>
 
-    <plurals name="hud_coins_a11y">
-        <item quantity="one">%1$d pièce collectée</item>
-        <item quantity="many">%1$d pièces collectées</item>
-        <item quantity="other">%1$d pièces collectées</item>
-    </plurals>
     <plurals name="hud_cells_unit">
         <item quantity="one">zone explorée</item>
         <item quantity="many">zones explorées</item>
@@ -110,7 +103,6 @@
     <string name="rule_custom_body">Choisissez la couleur et l\'opacité de vos zones avec le bouton « Couleur ».</string>
 
     <!-- ===================== Crédits ===================== -->
-    <string name="credits_title">Crédits</string>
     <string name="credits_version">Version 1.0</string>
     <string name="credits_tagline">Explorez. Découvrez. Collectionnez.</string>
     <string name="credits_dev_title">Développé par</string>
@@ -133,7 +125,6 @@
     <string name="shop_use">Utiliser</string>
     <string name="shop_equipped">Équipé</string>
     <string name="shop_active">Actif – %1$s</string>
-    <string name="shop_extend">Prolonger</string>
     <string name="shop_buy_a11y">Acheter %1$s pour %2$d pièces</string>
     <string name="shop_use_a11y">Utiliser %1$s</string>
     <string name="shop_result_success">Achat réussi : %1$s !</string>

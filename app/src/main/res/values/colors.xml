@@ -5,7 +5,6 @@
     <color name="gold_400">#FFFFC83D</color>
     <color name="gold_600">#FFE0A100</color>
     <color name="gold_800">#FF6B4A00</color>
-    <color name="gold_900">#FF3D2A00</color>
 
     <color name="teal_300">#FF5EEAD4</color>
     <color name="teal_400">#FF2DD4BF</color>
@@ -15,7 +14,6 @@
     <color name="violet_300">#FFC4B5FD</color>
     <color name="violet_800">#FF3B2F6B</color>
 
-    <color name="coral_300">#FFFDA4AF</color>
 
     <color name="red_300">#FFFFB4AB</color>
     <color name="red_800">#FF93000A</color>
@@ -24,7 +22,6 @@
     <!-- ========== Surfaces (sombres, bleu nuit) ========== -->
     <color name="night_950">#FF070A0F</color>
     <color name="night_900">#FF0B0F16</color>
-    <color name="night_850">#FF10151C</color>
     <color name="night_800">#FF151B24</color>
     <color name="night_750">#FF1A212C</color>
     <color name="night_700">#FF212935</color>
@@ -41,10 +38,8 @@
     <color name="hud_glass_strong">#E610151C</color>
     <color name="hud_stroke">#29FFFFFF</color>
     <color name="hud_tile">#14FFFFFF</color>
-    <color name="hud_tile_pressed">#29FFFFFF</color>
     <color name="hud_divider">#1AFFFFFF</color>
     <color name="hud_ripple">#33FFFFFF</color>
-    <color name="scrim_soft">#66000000</color>
 
     <!-- Pastilles des statistiques -->
     <color name="coin_pill_bg">#29FFC83D</color>
@@ -90,12 +85,9 @@
     <color name="boost_pill_stroke">#6660A5FA</color>
     <color name="accent_boost">#FF60A5FA</color>
     <color name="accent_shop">@color/gold_400</color>
-    <color name="locked_overlay">#B3000000</color>
 
     <!-- Icône de lanceur -->
     <color name="ic_launcher_monochrome">#FFFFFFFF</color>
 
-    <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="transparent">#00000000</color>
 </resources>

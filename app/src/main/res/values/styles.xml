@@ -32,11 +32,6 @@
         <item name="cornerSize">@dimen/bar_button_corner</item>
     </style>
 
-    <style name="ShapeAppearance.GeoMoneyHide.Tile" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/hud_tile_corner</item>
-    </style>
-
     <!-- ===================== Typographie ===================== -->
     <style name="TextAppearance.GeoMoneyHide.HudTitle" parent="TextAppearance.Material3.TitleMedium">
         <item name="android:fontFamily">sans-serif-black</item>

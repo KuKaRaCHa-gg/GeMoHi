@@ -7,7 +7,6 @@
     <dimen name="space_m">12dp</dimen>
     <dimen name="space_l">16dp</dimen>
     <dimen name="space_xl">24dp</dimen>
-    <dimen name="space_xxl">32dp</dimen>
 
     <!-- HUD -->
     <dimen name="hud_margin">12dp</dimen>
@@ -34,8 +33,6 @@
     <dimen name="sheet_icon_bubble">40dp</dimen>
     <dimen name="sheet_icon">22dp</dimen>
     <dimen name="swatch_size">48dp</dimen>
-    <dimen name="swatch_stroke_selected">3dp</dimen>
-    <dimen name="swatch_stroke">1dp</dimen>
     <dimen name="preview_height">112dp</dimen>
     <dimen name="preview_zone">72dp</dimen>
     <dimen name="preview_zone_stroke">2dp</dimen>
