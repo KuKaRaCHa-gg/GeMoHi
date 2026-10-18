@@ -6,11 +6,14 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.core.view.WindowCompat
+import androidx.lifecycle.Lifecycle
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -29,6 +32,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     companion object {
         private const val DEFAULT_ZOOM = 15f
+        private const val BOOST_REFRESH_MS = 1_000L
         private const val PREFS_NAME = "core_prefs"
         private const val PREF_BACKGROUND_PROMPT_DONE = "background_prompt_done"
     }
@@ -43,6 +47,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     /** Vrai pendant qu'une demande de permission système est affichée (onPause sans départ). */
     private var permissionRequestInProgress = false
     private var cameraCentered = false
+
+    // Rafraîchissement périodique des boosts actifs (uniquement au premier plan)
+    private val tickHandler = Handler(Looper.getMainLooper())
+    private val boostTicker = object : Runnable {
+        override fun run() {
+            uiManager.updateBoosts()
+            tickHandler.postDelayed(this, BOOST_REFRESH_MS)
+        }
+    }
 
     private val foregroundPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { result ->
@@ -80,10 +93,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         override fun onGameUpdated(update: GameUpdate) {
             update.newCellId?.let { gridManager.drawExploredCell(it) }
             if (update.coinsChanged) pieceManager.syncMarkers()
+            if (update.settingsChanged) map?.let { uiManager.applyMapStyle(it) } // thème de carte
             if (update.discovered > 0) uiManager.showDiscovered(update.discovered)
             if (update.collected > 0) uiManager.showCollected(update.collected)
             if (update.spawned > 0) uiManager.showSpawned(update.spawned)
             refreshStats(animate = true)
+            uiManager.updateBoosts()
         }
 
         override fun onLocationChanged(location: Location) {
@@ -149,10 +164,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         // Le suivi de premier plan remplace celui du service (une seule demande à la fois)
         LocationService.stop(this)
         LocationTracker.start(this, LocationTracker.Mode.FOREGROUND)
+        tickHandler.removeCallbacks(boostTicker)
+        boostTicker.run()
     }
 
     override fun onPause() {
         super.onPause()
+        tickHandler.removeCallbacks(boostTicker)
         // Rotation ou boîte de dialogue de permission : on garde le suivi actuel
         if (isChangingConfigurations || permissionRequestInProgress) return
         LocationTracker.stop(LocationTracker.Mode.FOREGROUND)
@@ -175,7 +193,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun refreshStats(animate: Boolean) {
-        uiManager.updateStats(gameState.coinsCollected, gameState.surfaceKm2, gameState.cellCount, animate)
+        // Le HUD affiche le solde dépensable (coinsCollected reste le total historique)
+        uiManager.updateStats(gameState.coinBalance, gameState.surfaceKm2, gameState.cellCount, animate)
     }
 
     /** Déplace la caméra sur la dernière position connue du joueur. */
@@ -195,7 +214,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun onLocationPermissionGranted() {
         enableMyLocationLayer()
-        if (lifecycle.currentState.isAtLeast(androidx.lifecycle.Lifecycle.State.RESUMED)) {
+        if (lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
             LocationTracker.start(this, LocationTracker.Mode.FOREGROUND)
         }
         LocationTracker.fetchLastLocation(this) { if (!cameraCentered) centerOnUser(animate = false) }

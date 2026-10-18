@@ -26,6 +26,10 @@ class LocationService : Service() {
         private const val TAG = "LocationService"
         private const val NOTIFICATION_ID = 12345
         private const val CHANNEL_ID = "GeoMoneyHideChannel"
+        private const val ACTION_STOP = "com.example.geomoneyhide.action.STOP_EXPLORATION"
+
+        /** Vrai entre une demande de démarrage acceptée et la destruction du service. */
+        private var isActive = false
 
         /**
          * Démarre le service. Renvoie false si le système l'interdit
@@ -33,6 +37,7 @@ class LocationService : Service() {
          */
         fun start(context: Context): Boolean = try {
             ContextCompat.startForegroundService(context, Intent(context, LocationService::class.java))
+            isActive = true
             true
         } catch (e: IllegalStateException) {
             // ForegroundServiceStartNotAllowedException hérite d'IllegalStateException
@@ -43,10 +48,23 @@ class LocationService : Service() {
             false
         }
 
+        /**
+         * Demande l'arrêt du service s'il tourne. On passe par une commande plutôt que par
+         * stopService() : la commande est traitée après onCreate(), donc après startForeground(),
+         * ce qui évite le plantage « startForegroundService() did not then call startForeground() »
+         * lors d'un aller-retour rapide arrière-plan / premier plan.
+         */
         fun stop(context: Context) {
-            context.stopService(Intent(context, LocationService::class.java))
+            if (!isActive) return
+            try {
+                context.startService(Intent(context, LocationService::class.java).setAction(ACTION_STOP))
+            } catch (e: IllegalStateException) {
+                context.stopService(Intent(context, LocationService::class.java))
+            }
         }
     }
+
+    private var inForeground = false
 
     override fun onCreate() {
         super.onCreate()
@@ -66,18 +84,25 @@ class LocationService : Service() {
             stopSelf()
             return
         }
-
-        if (!LocationTracker.start(this, LocationTracker.Mode.BACKGROUND)) {
-            stopSelf()
-        }
+        inForeground = true
     }
 
     // Pas de redémarrage automatique : l'activité relance le service quand elle passe en arrière-plan
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int = START_NOT_STICKY
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        when {
+            // Arrêt demandé (retour de l'activité ou action « Arrêter » de la notification)
+            intent?.action == ACTION_STOP -> stopSelf()
+            !inForeground -> stopSelf()
+            // Refusé si l'activité a déjà repris le suivi de premier plan entre-temps
+            !LocationTracker.startBackground(this) -> stopSelf()
+        }
+        return START_NOT_STICKY
+    }
 
     override fun onBind(intent: Intent?): IBinder? = null
 
     override fun onDestroy() {
+        isActive = false
         LocationTracker.stop(LocationTracker.Mode.BACKGROUND)
         GameRepository.flush()
         super.onDestroy()
@@ -99,12 +124,15 @@ class LocationService : Service() {
         val openApp = Intent(this, MapsActivity::class.java)
             .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0, openApp, PendingIntent.FLAG_IMMUTABLE)
+        val stopIntent = Intent(this, LocationService::class.java).setAction(ACTION_STOP)
+        val stopPendingIntent = PendingIntent.getService(this, 1, stopIntent, PendingIntent.FLAG_IMMUTABLE)
 
         return NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle(getString(R.string.core_notification_title))
             .setContentText(getString(R.string.core_notification_text))
             .setSmallIcon(R.drawable.ic_coin)
             .setContentIntent(pendingIntent)
+            .addAction(R.drawable.ic_coin, getString(R.string.core_notification_action_stop), stopPendingIntent)
             .setOngoing(true)
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .setCategory(NotificationCompat.CATEGORY_SERVICE)

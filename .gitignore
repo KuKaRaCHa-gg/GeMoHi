@@ -14,6 +14,6 @@
 .externalNativeBuild/
 .cxx/
 
-# API Keys - éviter de commiter les fichiers de propriétés
-*.properties
-!gradle-wrapper.properties
+# Clés d'API : seul local.properties (ignoré ci-dessus) et secrets.properties contiennent des secrets.
+# gradle.properties et local.defaults.properties doivent être commités.
+secrets.properties

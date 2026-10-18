@@ -82,6 +82,16 @@ object LocationTracker {
     }
 
     /**
+     * Démarre le mode arrière-plan, sauf si l'activité suit déjà la position au premier plan.
+     * @return false si le suivi d'arrière-plan n'a pas été démarré
+     */
+    @MainThread
+    fun startBackground(context: Context): Boolean {
+        if (currentMode == Mode.FOREGROUND) return false
+        return start(context, Mode.BACKGROUND)
+    }
+
+    /**
      * Arrête le suivi seulement s'il est encore dans le mode [mode] : le service qui s'arrête
      * ne coupe pas le suivi que l'activité vient de reprendre.
      */

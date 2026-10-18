@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Carte d'article du Marché (remplie par UIManager). -->
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.GeoMoneyHide.ShopCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/space_s">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:minHeight="72dp"
+        android:orientation="horizontal"
+        android:padding="@dimen/space_m">
+
+        <FrameLayout
+            android:id="@+id/shop_item_preview"
+            android:layout_width="@dimen/swatch_size"
+            android:layout_height="@dimen/swatch_size"
+            android:importantForAccessibility="noHideDescendants">
+
+            <ImageView
+                android:id="@+id/shop_item_icon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:importantForAccessibility="no"
+                tools:src="@drawable/ic_magnet" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/shop_item_texts"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_m"
+            android:layout_marginEnd="@dimen/space_s"
+            android:layout_weight="1"
+            android:focusable="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/shop_item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.GeoMoneyHide.ItemTitle"
+                tools:text="Aimant" />
+
+            <TextView
+                android:id="@+id/shop_item_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_xxs"
+                android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                android:textColor="@color/text_secondary"
+                tools:text="Rayon de collecte de 60 m pendant 30 min" />
+
+            <TextView
+                android:id="@+id/shop_item_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_xs"
+                android:fontFeatureSettings="tnum"
+                android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
+                android:textColor="@color/teal_400"
+                android:visibility="gone"
+                tools:text="Actif – 12:34"
+                tools:visibility="visible" />
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/shop_item_action"
+            style="@style/Widget.GeoMoneyHide.Button.Price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="30" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

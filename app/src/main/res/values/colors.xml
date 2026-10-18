@@ -64,15 +64,33 @@
     <color name="preview_grid">#22FFFFFF</color>
     <color name="preview_road">#FF2B3647</color>
 
-    <!-- Palette des zones (sélecteur) -->
+    <!-- Palette des zones (articles ZONE_COLOR du Marché) -->
+    <color name="zone_green">#FF22C55E</color>
+    <color name="zone_blue">#FF3B82F6</color>
+    <color name="zone_violet">#FFA78BFA</color>
+    <color name="zone_orange">#FFFB923C</color>
+    <color name="zone_pink">#FFF472B6</color>
+    <color name="zone_cyan">#FF22D3EE</color>
+    <color name="zone_red">#FFF43F5E</color>
     <color name="zone_gold">#FFFFC83D</color>
-    <color name="zone_emerald">#FF34D399</color>
-    <color name="zone_lagoon">#FF22D3EE</color>
-    <color name="zone_sapphire">#FF3B82F6</color>
-    <color name="zone_amethyst">#FFA78BFA</color>
-    <color name="zone_ruby">#FFF43F5E</color>
-    <color name="zone_coral">#FFFB923C</color>
-    <color name="zone_lime">#FFA3E635</color>
+
+    <!-- Aperçus des thèmes de carte (dégradés) -->
+    <color name="theme_night_start">#FF0E1626</color>
+    <color name="theme_night_end">#FF1F3A5F</color>
+    <color name="theme_classic_start">#FFE8EAED</color>
+    <color name="theme_classic_end">#FF9ED3A8</color>
+    <color name="theme_retro_start">#FFEBE3CD</color>
+    <color name="theme_retro_end">#FFB9987A</color>
+    <color name="theme_neon_start">#FF050008</color>
+    <color name="theme_neon_end">#FFFF2BD6</color>
+    <color name="theme_neon_mid">#FF00E5FF</color>
+
+    <!-- Boosts -->
+    <color name="boost_pill_bg">#2960A5FA</color>
+    <color name="boost_pill_stroke">#6660A5FA</color>
+    <color name="accent_boost">#FF60A5FA</color>
+    <color name="accent_shop">@color/gold_400</color>
+    <color name="locked_overlay">#B3000000</color>
 
     <!-- Icône de lanceur -->
     <color name="ic_launcher_monochrome">#FFFFFFFF</color>

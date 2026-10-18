@@ -11,17 +11,17 @@ android {
     defaultConfig {
         applicationId = "com.example.geomoneyhide"
         minSdk = 26
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
-
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -40,8 +40,12 @@ android {
     }
 }
 
-dependencies {
+secrets {
+    // Fichier commité avec une clé factice : la compilation fonctionne sans local.properties
+    defaultPropertiesFileName = "local.defaults.properties"
+}
 
+dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -49,15 +53,8 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.play.services.maps)
     implementation(libs.play.services.location)
-    implementation("com.google.code.gson:gson:2.10.1")
+    implementation(libs.gson)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
 }
-
-dependencies {
-    implementation("org.locationtech.jts:jts-core:1.19.0")
-    implementation("androidx.core:core-ktx:1.10.0")
-}
-

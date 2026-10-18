@@ -28,9 +28,13 @@ import java.util.concurrent.Executors
  */
 object GameRepository {
 
-    /** Observateur des changements de l'état du jeu (appelé sur le thread principal). */
-    fun interface Listener {
-        fun onGameUpdated(update: GameUpdate)
+    /** Observateur de l'état du jeu (appelé sur le thread principal). */
+    interface Listener {
+        /** L'état a changé (exploration, pièces, achat, réglage). */
+        fun onGameUpdated(update: GameUpdate) {}
+
+        /** Nouvelle position reçue (même imprécise). */
+        fun onLocationChanged(location: Location) {}
     }
 
     private const val TAG = "GameRepository"
@@ -61,6 +65,9 @@ object GameRepository {
     private var revision = 0L
     private var savedRevision = 0L
     private var saveScheduled = false
+
+    /** Vrai si la sauvegarde existe mais n'a pas pu être lue : on ne l'écrase surtout pas. */
+    private var saveBlocked = false
     private val saveRunnable = Runnable { flush() }
 
     val isInitialized: Boolean get() = saveFile != null
@@ -74,18 +81,24 @@ object GameRepository {
         val file = AtomicFile(File(context.applicationContext.filesDir, SAVE_FILE_NAME))
         saveFile = file
         load(file)
+        // Achats et réglages : sauvegarde différée + notification des observateurs
+        state.changeListener = { update ->
+            markDirty()
+            dispatch(update)
+        }
     }
 
     private fun load(file: AtomicFile) {
         try {
             // readFully() restaure aussi une éventuelle écriture interrompue
             val json = String(file.readFully(), Charsets.UTF_8)
-            SaveCodec.decodeInto(json, state)
+            if (SaveCodec.decodeInto(json, state)) markDirty() // réécriture au nouveau format
             Log.i(TAG, "Sauvegarde chargée : ${state.cellCount} cellules, ${state.coins.size} pièces actives")
         } catch (e: FileNotFoundException) {
             // Première partie : aucune sauvegarde
         } catch (e: IOException) {
-            Log.e(TAG, "Lecture de la sauvegarde impossible", e)
+            Log.e(TAG, "Lecture de la sauvegarde impossible, écriture désactivée", e)
+            saveBlocked = true
         } catch (e: JsonParseException) {
             // Fichier corrompu : on le garde de côté et on repart d'un état vierge
             Log.e(TAG, "Sauvegarde corrompue, mise de côté", e)
@@ -107,6 +120,7 @@ object GameRepository {
     @MainThread
     fun onLocation(location: Location) {
         lastLocation = location
+        for (listener in listeners.toList()) listener.onLocationChanged(location)
         if (location.hasAccuracy() && location.accuracy > MAX_ACCURACY_M) return
         val update = state.recordPosition(location.latitude, location.longitude, random)
         if (update.hasChanges) {
@@ -126,6 +140,7 @@ object GameRepository {
             onLocation(location)
         } else if (lastLocation == null) {
             lastLocation = location
+            for (listener in listeners.toList()) listener.onLocationChanged(location)
         }
     }
 
@@ -148,7 +163,7 @@ object GameRepository {
         mainHandler.removeCallbacks(saveRunnable)
         saveScheduled = false
         val file = saveFile ?: return
-        if (revision == savedRevision) return
+        if (saveBlocked || revision == savedRevision) return
         val rev = revision
         val json = SaveCodec.encode(state) // instantané pris sur le thread principal
         savedRevision = rev

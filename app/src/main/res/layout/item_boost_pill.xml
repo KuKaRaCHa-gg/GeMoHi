@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Pastille de boost actif dans le HUD (texte et icône définis par UIManager). -->
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/space_s"
+    android:background="@drawable/bg_boost_pill"
+    android:compoundDrawablePadding="@dimen/space_xs"
+    android:drawableTint="@color/accent_boost"
+    android:fontFeatureSettings="tnum"
+    android:gravity="center_vertical"
+    android:maxLines="1"
+    android:paddingStart="@dimen/space_s"
+    android:paddingTop="@dimen/space_xs"
+    android:paddingEnd="@dimen/space_m"
+    android:paddingBottom="@dimen/space_xs"
+    android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
+    android:textColor="@color/text_primary"
+    tools:drawableStart="@drawable/ic_magnet"
+    tools:text="Aimant · 12:34" />

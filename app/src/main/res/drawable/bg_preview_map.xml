@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Mini-carte nocturne servant de fond à l'aperçu du sélecteur de couleur. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="320dp"
+    android:height="112dp"
+    android:viewportWidth="320"
+    android:viewportHeight="112">
+    <path
+        android:fillColor="@color/preview_land"
+        android:pathData="M0,0h320v112h-320z" />
+    <path
+        android:fillColor="#FF0E2A47"
+        android:pathData="M230,112C238,90 262,80 280,70C296,61 308,48 320,40V112Z" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="@color/preview_road"
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:pathData="M-10,80C60,70 110,30 180,36C230,40 260,18 330,10" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="@color/preview_road"
+        android:strokeWidth="3"
+        android:strokeLineCap="round"
+        android:pathData="M70,-10L120,120M210,-10C200,40 214,80 196,120" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="@color/preview_grid"
+        android:strokeWidth="1"
+        android:pathData="M40,0L40,112M80,0L80,112M120,0L120,112M160,0L160,112M200,0L200,112M240,0L240,112M280,0L280,112M0,28L320,28M0,56L320,56M0,84L320,84" />
+</vector>

@@ -37,6 +37,8 @@
     </plurals>
 
     <!-- ===================== Barre d'actions ===================== -->
+    <string name="action_shop">Marché</string>
+    <string name="action_shop_desc">Ouvrir le Marché</string>
     <string name="action_color">Couleur</string>
     <string name="action_rules">Règles</string>
     <string name="action_credits">Crédits</string>
@@ -82,14 +84,12 @@
     <string name="color_applied">Nouvelle couleur appliquée</string>
     <string name="color_swatch_selected">%1$s, sélectionnée</string>
 
-    <string name="swatch_gold">Or</string>
-    <string name="swatch_emerald">Émeraude</string>
-    <string name="swatch_lagoon">Lagon</string>
-    <string name="swatch_sapphire">Saphir</string>
-    <string name="swatch_amethyst">Améthyste</string>
-    <string name="swatch_ruby">Rubis</string>
-    <string name="swatch_coral">Corail</string>
-    <string name="swatch_lime">Citron vert</string>
+    <string name="color_swatch_locked">%1$s, verrouillée, %2$d pièces</string>
+    <string name="color_unlock_title">Débloquer « %1$s » ?</string>
+    <string name="color_unlock_message">Cet article coûte %1$d pièces. Votre solde : %2$d pièces.</string>
+    <string name="color_unlock_buy">Acheter</string>
+    <string name="color_unlock_open_shop">Voir le Marché</string>
+    <string name="color_custom_locked_desc">Débloquer la teinte libre pour %1$d pièces</string>
 
     <!-- ===================== Règles ===================== -->
     <string name="rules_title">Règles du jeu</string>
@@ -104,6 +104,8 @@
     <string name="rule_discover_body">Découvrir une nouvelle zone collecte automatiquement toutes les pièces qui s\'y trouvent.</string>
     <string name="rule_regen_title">Des trésors sans fin</string>
     <string name="rule_regen_body">De nouvelles pièces apparaissent (3 par km² exploré) entre 500 m et 2 km de vos zones explorées.</string>
+    <string name="rule_shop_title">Dépensez au Marché</string>
+    <string name="rule_shop_body">Échangez vos pièces contre des couleurs, des thèmes de carte et des boosts temporaires (aimant, double butin).</string>
     <string name="rule_custom_title">Personnalisez</string>
     <string name="rule_custom_body">Choisissez la couleur et l\'opacité de vos zones avec le bouton « Couleur ».</string>
 
@@ -118,4 +120,58 @@
     <string name="tech_location">Fused Location Provider</string>
     <string name="tech_material">Material Design 3</string>
     <string name="credits_copyright">© 2025 GeoMoneyHide</string>
+
+    <!-- ===================== Marché ===================== -->
+    <string name="shop_title">Marché</string>
+    <string name="shop_subtitle">Dépensez vos pièces d\'or.</string>
+    <string name="shop_tab_colors">Couleurs</string>
+    <string name="shop_tab_themes">Thèmes</string>
+    <string name="shop_tab_boosts">Boosts</string>
+    <string name="shop_balance_a11y">Solde : %1$d pièces</string>
+    <string name="shop_free">Gratuit</string>
+    <string name="shop_owned">Possédé</string>
+    <string name="shop_use">Utiliser</string>
+    <string name="shop_equipped">Équipé</string>
+    <string name="shop_active">Actif – %1$s</string>
+    <string name="shop_extend">Prolonger</string>
+    <string name="shop_buy_a11y">Acheter %1$s pour %2$d pièces</string>
+    <string name="shop_use_a11y">Utiliser %1$s</string>
+    <string name="shop_result_success">Achat réussi : %1$s !</string>
+    <string name="shop_result_not_enough">Pas assez de pièces : il vous en manque %1$d.</string>
+    <string name="shop_result_owned">Vous possédez déjà « %1$s ».</string>
+    <string name="shop_theme_applied">Thème « %1$s » appliqué</string>
+    <!-- %1$d = durée en minutes -->
+    <string name="shop_duration">Durée : %1$d min</string>
+
+    <!-- Couleurs de zones -->
+    <string name="item_color_green">Vert forêt</string>
+    <string name="item_color_blue">Bleu saphir</string>
+    <string name="item_color_violet">Violet améthyste</string>
+    <string name="item_color_orange">Orange corail</string>
+    <string name="item_color_pink">Rose bonbon</string>
+    <string name="item_color_cyan">Cyan lagon</string>
+    <string name="item_color_red">Rouge rubis</string>
+    <string name="item_color_gold">Or royal</string>
+    <string name="item_color_custom">Teinte libre</string>
+    <string name="item_color_desc">Couleur pour vos zones explorées.</string>
+    <string name="item_color_gold_desc">La couleur des vrais chasseurs de trésor.</string>
+    <string name="item_color_custom_desc">Débloque le curseur de teinte : toutes les couleurs possibles.</string>
+
+    <!-- Thèmes de carte -->
+    <string name="item_theme_night">Nuit d\'explorateur</string>
+    <string name="item_theme_night_desc">Carte sombre bleu nuit, idéale pour repérer l\'or.</string>
+    <string name="item_theme_classic">Classique</string>
+    <string name="item_theme_classic_desc">La carte Google Maps standard.</string>
+    <string name="item_theme_retro">Rétro</string>
+    <string name="item_theme_retro_desc">Tons sépia d\'une vieille carte au trésor.</string>
+    <string name="item_theme_neon">Néon</string>
+    <string name="item_theme_neon_desc">Nuit noire et routes cyan et magenta.</string>
+
+    <!-- Boosts -->
+    <string name="item_boost_magnet">Aimant</string>
+    <string name="item_boost_magnet_desc">Collecte les pièces à 60 m au lieu de 20 m.</string>
+    <string name="item_boost_double">Double butin</string>
+    <string name="item_boost_double_desc">Chaque pièce collectée compte double.</string>
+    <string name="boost_pill">%1$s · %2$s</string>
+    <string name="boost_pill_a11y">Boost %1$s actif, encore %2$s</string>
 </resources>

@@ -8,6 +8,7 @@
     <string name="core_notification_channel_name">Exploration en arrière-plan</string>
     <string name="core_notification_channel_description">Indique que GeoMoneyHide continue d\'explorer pendant que l\'application est fermée.</string>
     <string name="core_notification_title">GeoMoneyHide explore pour vous</string>
+    <string name="core_notification_action_stop">Arrêter</string>
     <string name="core_notification_text">Vos déplacements continuent de découvrir des zones et de ramasser des pièces.</string>
 
     <!-- Permissions -->

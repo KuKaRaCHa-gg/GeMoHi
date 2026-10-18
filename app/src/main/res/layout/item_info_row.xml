@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ligne « icône + titre + texte » des feuilles Règles / Crédits (remplie par UIManager). -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    android:orientation="horizontal"
+    android:paddingTop="@dimen/space_s"
+    android:paddingBottom="@dimen/space_s">
+
+    <FrameLayout
+        android:id="@+id/info_bubble"
+        android:layout_width="@dimen/sheet_icon_bubble"
+        android:layout_height="@dimen/sheet_icon_bubble"
+        android:background="@drawable/bg_bubble"
+        android:backgroundTint="@color/coin_pill_bg">
+
+        <ImageView
+            android:id="@+id/info_icon"
+            android:layout_width="@dimen/sheet_icon"
+            android:layout_height="@dimen/sheet_icon"
+            android:layout_gravity="center"
+            android:importantForAccessibility="no"
+            app:tint="@color/gold_400"
+            tools:src="@drawable/ic_explore" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_l"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/info_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.GeoMoneyHide.ItemTitle"
+            tools:text="Explorez le monde réel" />
+
+        <TextView
+            android:id="@+id/info_body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_xxs"
+            android:textAppearance="@style/TextAppearance.GeoMoneyHide.ItemBody"
+            tools:text="Déplacez-vous physiquement…" />
+    </LinearLayout>
+</LinearLayout>

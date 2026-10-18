@@ -19,3 +19,13 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+# --- Sauvegarde du jeu (Gson, réflexion) ---
+# Les noms des champs sont les clés JSON de game_data.json : ne pas renommer ni supprimer.
+-keepattributes Signature, *Annotation*, InnerClasses, EnclosingMethod
+-keep class com.example.geomoneyhide.SaveData { *; }
+-keep class com.example.geomoneyhide.SavedCoin { *; }
+-keep class com.example.geomoneyhide.SavedLatLng { *; }
+# Gson : TypeToken et adaptateurs génériques
+-keep class com.google.gson.reflect.TypeToken { *; }
+-keep class * extends com.google.gson.reflect.TypeToken
+-dontwarn sun.misc.**
