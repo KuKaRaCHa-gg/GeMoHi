@@ -1,10 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
+    <!-- ========== Marque : or / sarcelle sur nuit marine ========== -->
+    <color name="gold_300">#FFFFDD80</color>
+    <color name="gold_400">#FFFFC83D</color>
+    <color name="gold_600">#FFE0A100</color>
+    <color name="gold_800">#FF6B4A00</color>
+    <color name="gold_900">#FF3D2A00</color>
+
+    <color name="teal_300">#FF5EEAD4</color>
+    <color name="teal_400">#FF2DD4BF</color>
+    <color name="teal_800">#FF0F4F49</color>
+    <color name="teal_900">#FF00332E</color>
+
+    <color name="violet_300">#FFC4B5FD</color>
+    <color name="violet_800">#FF3B2F6B</color>
+
+    <color name="coral_300">#FFFDA4AF</color>
+
+    <color name="red_300">#FFFFB4AB</color>
+    <color name="red_800">#FF93000A</color>
+    <color name="red_900">#FF690005</color>
+
+    <!-- ========== Surfaces (sombres, bleu nuit) ========== -->
+    <color name="night_950">#FF070A0F</color>
+    <color name="night_900">#FF0B0F16</color>
+    <color name="night_850">#FF10151C</color>
+    <color name="night_800">#FF151B24</color>
+    <color name="night_750">#FF1A212C</color>
+    <color name="night_700">#FF212935</color>
+    <color name="night_650">#FF29323F</color>
+    <color name="night_500">#FF3C4656</color>
+    <color name="night_400">#FF5A6577</color>
+
+    <color name="text_primary">#FFF2F5FA</color>
+    <color name="text_secondary">#FFAEB8C7</color>
+    <color name="text_on_gold">#FF2A1D00</color>
+
+    <!-- ========== HUD « verre sombre » ========== -->
+    <color name="hud_glass">#CC10151C</color>
+    <color name="hud_glass_strong">#E610151C</color>
+    <color name="hud_stroke">#29FFFFFF</color>
+    <color name="hud_tile">#14FFFFFF</color>
+    <color name="hud_tile_pressed">#29FFFFFF</color>
+    <color name="hud_divider">#1AFFFFFF</color>
+    <color name="hud_ripple">#33FFFFFF</color>
+    <color name="scrim_soft">#66000000</color>
+
+    <!-- Pastilles des statistiques -->
+    <color name="coin_pill_bg">#29FFC83D</color>
+    <color name="coin_pill_stroke">#66FFC83D</color>
+    <color name="stat_surface_bg">#262DD4BF</color>
+    <color name="stat_cells_bg">#26A78BFA</color>
+
+    <!-- Accents des boutons de la barre inférieure -->
+    <color name="accent_color">#FFF472B6</color>
+    <color name="accent_rules">#FF60A5FA</color>
+    <color name="accent_credits">#FFFDBA74</color>
+    <color name="accent_surface">@color/teal_400</color>
+    <color name="accent_cells">#FFA78BFA</color>
+
+    <!-- Aperçu de carte (sélecteur de couleur) -->
+    <color name="preview_land">#FF1B2433</color>
+    <color name="preview_grid">#22FFFFFF</color>
+    <color name="preview_road">#FF2B3647</color>
+
+    <!-- Palette des zones (sélecteur) -->
+    <color name="zone_gold">#FFFFC83D</color>
+    <color name="zone_emerald">#FF34D399</color>
+    <color name="zone_lagoon">#FF22D3EE</color>
+    <color name="zone_sapphire">#FF3B82F6</color>
+    <color name="zone_amethyst">#FFA78BFA</color>
+    <color name="zone_ruby">#FFF43F5E</color>
+    <color name="zone_coral">#FFFB923C</color>
+    <color name="zone_lime">#FFA3E635</color>
+
+    <!-- Icône de lanceur -->
+    <color name="ic_launcher_monochrome">#FFFFFFFF</color>
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00000000</color>
 </resources>

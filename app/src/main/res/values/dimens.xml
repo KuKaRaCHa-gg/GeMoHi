@@ -1,4 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="text_size_button">14sp</dimen>
+    <!-- Espacements (grille de 4dp) -->
+    <dimen name="space_xxs">2dp</dimen>
+    <dimen name="space_xs">4dp</dimen>
+    <dimen name="space_s">8dp</dimen>
+    <dimen name="space_m">12dp</dimen>
+    <dimen name="space_l">16dp</dimen>
+    <dimen name="space_xl">24dp</dimen>
+    <dimen name="space_xxl">32dp</dimen>
+
+    <!-- HUD -->
+    <dimen name="hud_margin">12dp</dimen>
+    <dimen name="hud_corner">22dp</dimen>
+    <dimen name="hud_stroke">1dp</dimen>
+    <dimen name="hud_padding">14dp</dimen>
+    <dimen name="hud_logo">36dp</dimen>
+    <dimen name="hud_tile_corner">14dp</dimen>
+    <dimen name="stat_icon_bubble">32dp</dimen>
+    <dimen name="stat_icon">18dp</dimen>
+    <dimen name="coin_pill_icon">24dp</dimen>
+    <dimen name="map_padding_extra">8dp</dimen>
+
+    <!-- Barre inférieure -->
+    <dimen name="bar_corner">24dp</dimen>
+    <dimen name="bar_button_corner">16dp</dimen>
+    <dimen name="bar_button_min_height">60dp</dimen>
+    <dimen name="bar_button_icon">22dp</dimen>
+    <dimen name="fab_corner">18dp</dimen>
+
+    <!-- Feuilles (bottom sheets) -->
+    <dimen name="sheet_corner">28dp</dimen>
+    <dimen name="sheet_padding_h">24dp</dimen>
+    <dimen name="sheet_icon_bubble">40dp</dimen>
+    <dimen name="sheet_icon">22dp</dimen>
+    <dimen name="swatch_size">48dp</dimen>
+    <dimen name="swatch_stroke_selected">3dp</dimen>
+    <dimen name="swatch_stroke">1dp</dimen>
+    <dimen name="preview_height">112dp</dimen>
+    <dimen name="preview_zone">72dp</dimen>
+    <dimen name="preview_zone_stroke">2dp</dimen>
+    <dimen name="hue_strip_height">10dp</dimen>
+    <dimen name="credits_logo">72dp</dimen>
+
+    <!-- Animation « +N » -->
+    <dimen name="coin_gain_travel">18dp</dimen>
+
+    <!-- Marqueur pièce -->
+    <dimen name="marker_coin_size">40dp</dimen>
 </resources>

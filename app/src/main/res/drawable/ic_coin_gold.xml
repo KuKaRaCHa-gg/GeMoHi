@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Pièce d'or en couleur (HUD). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#FF8A5A00"
+        android:pathData="M2,12.6a10,10 0,1 1,20,0a10,10 0,1 1,-20,0Z" />
+    <path
+        android:fillColor="#FFE0A100"
+        android:pathData="M2,12a10,10 0,1 1,20,0a10,10 0,1 1,-20,0Z" />
+    <path
+        android:fillColor="#FFFFC83D"
+        android:pathData="M3.6,12a8.4,8.4 0,1 1,16.8,0a8.4,8.4 0,1 1,-16.8,0Z" />
+    <path
+        android:fillColor="#99FFF6D6"
+        android:pathData="M5.2,9.2C6.3,6.5 8.9,4.6 12,4.6c1.2,0 2.3,0.3 3.3,0.8C11.4,5 7.6,6.4 5.2,9.2Z" />
+    <path
+        android:fillColor="#FFB07800"
+        android:pathData="M12,7.7L13.12,10.76L16.37,10.88L13.81,12.89L14.7,16.02L12,14.2L9.3,16.02L10.19,12.89L7.63,10.88L10.88,10.76Z" />
+</vector>

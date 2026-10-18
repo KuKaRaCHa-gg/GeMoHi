@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Textes de la logique de jeu (notifications, permissions, messages). -->
+<resources>
+    <!-- Carte -->
+    <string name="core_coin_marker_title">Pièce</string>
+
+    <!-- Notification du service d'arrière-plan -->
+    <string name="core_notification_channel_name">Exploration en arrière-plan</string>
+    <string name="core_notification_channel_description">Indique que GeoMoneyHide continue d\'explorer pendant que l\'application est fermée.</string>
+    <string name="core_notification_title">GeoMoneyHide explore pour vous</string>
+    <string name="core_notification_text">Vos déplacements continuent de découvrir des zones et de ramasser des pièces.</string>
+
+    <!-- Permissions -->
+    <string name="core_permission_location_denied">Sans accès à la position, impossible d\'explorer : la carte reste consultable.</string>
+    <string name="core_permission_approximate_only">Position approximative uniquement : activez la position exacte pour explorer et ramasser des pièces.</string>
+    <string name="core_permission_background_title">Explorer en arrière-plan ?</string>
+    <string name="core_permission_background_message">Pour continuer à découvrir des zones et ramasser des pièces quand l\'application est fermée, choisissez « Toujours autoriser » dans l\'écran suivant.</string>
+    <string name="core_permission_background_accept">Continuer</string>
+    <string name="core_permission_background_decline">Plus tard</string>
+    <string name="core_permission_background_granted">Exploration en arrière-plan activée</string>
+    <string name="core_permission_background_denied">L\'exploration s\'arrêtera quand l\'application sera fermée</string>
+
+    <!-- Divers -->
+    <string name="core_location_unavailable">Position inconnue pour le moment</string>
+</resources>

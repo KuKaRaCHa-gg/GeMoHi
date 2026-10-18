@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Calque monochrome de l'icône adaptative (icônes à thème Android 13+). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <group
+        android:scaleX="2.5"
+        android:scaleY="2.5"
+        android:translateX="24"
+        android:translateY="24">
+        <path
+            android:fillColor="@color/ic_launcher_monochrome"
+            android:fillType="evenOdd"
+            android:pathData="M2,12a10,10 0,1 1,20,0a10,10 0,1 1,-20,0ZM3.6,12a8.4,8.4 0,1 1,16.8,0a8.4,8.4 0,1 1,-16.8,0ZM4.6,12a7.4,7.4 0,1 1,14.8,0a7.4,7.4 0,1 1,-14.8,0ZM12,7.7L13.12,10.76L16.37,10.88L13.81,12.89L14.7,16.02L12,14.2L9.3,16.02L10.19,12.89L7.63,10.88L10.88,10.76Z" />
+    </group>
+</vector>

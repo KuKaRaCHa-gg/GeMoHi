@@ -1,9 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.GeoMoneyHide" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+    <!--
+        Thème « explorateur nocturne » : sombre en permanence (le HUD flotte au-dessus d'une
+        carte au style nuit), or en couleur primaire, sarcelle en secondaire.
+        Il n'y a volontairement pas de values-night : le même thème est utilisé en clair/sombre.
+    -->
+    <style name="Base.Theme.GeoMoneyHide" parent="Theme.Material3.Dark.NoActionBar">
+        <!-- Primaire : or -->
+        <item name="colorPrimary">@color/gold_400</item>
+        <item name="colorOnPrimary">@color/text_on_gold</item>
+        <item name="colorPrimaryContainer">@color/gold_800</item>
+        <item name="colorOnPrimaryContainer">@color/gold_300</item>
+        <item name="colorPrimaryInverse">@color/gold_600</item>
+
+        <!-- Secondaire : sarcelle -->
+        <item name="colorSecondary">@color/teal_400</item>
+        <item name="colorOnSecondary">@color/teal_900</item>
+        <item name="colorSecondaryContainer">@color/teal_800</item>
+        <item name="colorOnSecondaryContainer">@color/teal_300</item>
+
+        <!-- Tertiaire : améthyste -->
+        <item name="colorTertiary">@color/violet_300</item>
+        <item name="colorOnTertiary">@color/violet_800</item>
+        <item name="colorTertiaryContainer">@color/violet_800</item>
+        <item name="colorOnTertiaryContainer">@color/violet_300</item>
+
+        <!-- Erreur -->
+        <item name="colorError">@color/red_300</item>
+        <item name="colorOnError">@color/red_900</item>
+        <item name="colorErrorContainer">@color/red_800</item>
+        <item name="colorOnErrorContainer">@color/red_300</item>
+
+        <!-- Surfaces -->
+        <item name="android:colorBackground">@color/night_900</item>
+        <item name="colorOnBackground">@color/text_primary</item>
+        <item name="colorSurface">@color/night_900</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="colorSurfaceVariant">@color/night_700</item>
+        <item name="colorOnSurfaceVariant">@color/text_secondary</item>
+        <item name="colorSurfaceInverse">@color/text_primary</item>
+        <item name="colorOnSurfaceInverse">@color/night_800</item>
+        <item name="colorSurfaceContainerLowest">@color/night_950</item>
+        <item name="colorSurfaceContainerLow">@color/night_800</item>
+        <item name="colorSurfaceContainer">@color/night_750</item>
+        <item name="colorSurfaceContainerHigh">@color/night_700</item>
+        <item name="colorSurfaceContainerHighest">@color/night_650</item>
+        <item name="colorSurfaceBright">@color/night_650</item>
+        <item name="colorSurfaceDim">@color/night_900</item>
+        <item name="colorOutline">@color/night_400</item>
+        <item name="colorOutlineVariant">@color/night_500</item>
+
+        <!-- Composants -->
+        <item name="snackbarStyle">@style/Widget.GeoMoneyHide.Snackbar</item>
+        <item name="snackbarTextViewStyle">@style/Widget.GeoMoneyHide.Snackbar.TextView</item>
+        <item name="snackbarButtonStyle">@style/Widget.GeoMoneyHide.Snackbar.Button</item>
+        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.GeoMoneyHide.BottomSheetDialog</item>
+
+        <!-- Fenêtre bord à bord -->
+        <item name="android:windowBackground">@color/night_900</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
+        <item name="android:enforceNavigationBarContrast" tools:targetApi="29">false</item>
+        <item name="android:enforceStatusBarContrast" tools:targetApi="29">false</item>
+        <item name="android:windowLayoutInDisplayCutoutMode" tools:targetApi="28">shortEdges</item>
     </style>
 
     <style name="Theme.GeoMoneyHide" parent="Base.Theme.GeoMoneyHide" />
+
+    <!-- Feuilles modales -->
+    <style name="ThemeOverlay.GeoMoneyHide.BottomSheetDialog" parent="ThemeOverlay.Material3.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.GeoMoneyHide.BottomSheet</item>
+        <item name="android:navigationBarColor">@color/night_800</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
+    </style>
+
 </resources>

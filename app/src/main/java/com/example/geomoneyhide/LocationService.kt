@@ -5,143 +5,110 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.Service
+import android.content.Context
 import android.content.Intent
+import android.content.pm.ServiceInfo
 import android.os.Build
 import android.os.IBinder
+import android.util.Log
 import androidx.core.app.NotificationCompat
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationResult
-import com.google.android.gms.location.LocationServices
+import androidx.core.app.ServiceCompat
+import androidx.core.content.ContextCompat
 
 /**
- * Service de localisation qui fonctionne en arrière-plan
- * Il fonctionne comme un service de premier plan avec une notification permanente.
+ * Service de premier plan (type « location ») qui poursuit l'exploration quand l'application
+ * n'est plus visible. Il enregistre directement les positions dans [GameRepository] :
+ * la partie progresse même si l'activité n'existe plus.
  */
 class LocationService : Service() {
-    // Client pour accéder aux services de localisation Google
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
-
-    // Callback pour recevoir les mises à jour de position
-    private lateinit var locationCallback: LocationCallback
-
-    /**
-     * Méthode appelée lors de la création du service
-     * Initialise les services de localisation et démarre le service en premier plan
-     */
-    override fun onCreate() {
-        super.onCreate()
-        // Initialise le client de localisation
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-
-        // Crée le canal de notification (obligatoire depuis Android 8.0)
-        createNotificationChannel()
-
-        // Crée et affiche la notification permanente
-        val notification = createNotification()
-        startForeground(NOTIFICATION_ID, notification)
-
-        // Configure les mises à jour de localisation
-        setupLocationUpdates()
-    }
-
-    /**
-     * Configure la fréquence et la précision des mises à jour de position
-     * Définit également comment les nouvelles positions sont traitées
-     */
-    private fun setupLocationUpdates() {
-        // Configure les paramètres de demande de localisation
-        val locationRequest = LocationRequest.create()
-            .setInterval(10000)  // Intervalle normal: 10 secondes
-            .setFastestInterval(5000)  // Intervalle minimum: 5 secondes
-            .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)  // Précision maximale (GPS)
-
-        // Définit le callback pour traiter les nouvelles positions
-        locationCallback = object : LocationCallback() {
-            override fun onLocationResult(locationResult: LocationResult) {
-                // Envoie la dernière position connue à l'activité via un broadcast
-                val intent = Intent("LOCATION_UPDATE")
-                locationResult.lastLocation?.let { intent.putExtra("latitude", it.latitude) }
-                locationResult.lastLocation?.let { intent.putExtra("longitude", it.longitude) }
-                sendBroadcast(intent)
-            }
-        }
-
-        try {
-            // Démarre les mises à jour de localisation
-            fusedLocationClient.requestLocationUpdates(
-                locationRequest,
-                locationCallback,
-                null  // Looper par défaut
-            )
-        } catch (e: SecurityException) {
-            // Gère les problèmes de permission (permissions non accordées)
-        }
-    }
-
-    /**
-     * Crée un canal de notification pour le service
-     * Obligatoire depuis Android 8.0 (API 26)
-     */
-    private fun createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // Crée un canal avec une priorité basse pour réduire l'intrusion
-            val channel = NotificationChannel(
-                CHANNEL_ID,
-                "GeoMoneyHide Location",  // Nom visible par l'utilisateur
-                NotificationManager.IMPORTANCE_LOW  // Priorité basse (pas de son ni vibration)
-            )
-
-            // Enregistre le canal auprès du système
-            val notificationManager = getSystemService(NotificationManager::class.java)
-            notificationManager.createNotificationChannel(channel)
-        }
-    }
-
-    /**
-     * Crée la notification permanente affichée pendant l'exécution du service
-     * @return La notification configurée
-     */
-    private fun createNotification(): Notification {
-        // Intent pour ouvrir l'application quand l'utilisateur touche la notification
-        val notificationIntent = Intent(this, MapsActivity::class.java)
-        val pendingIntent = PendingIntent.getActivity(
-            this, 0, notificationIntent,
-            PendingIntent.FLAG_IMMUTABLE  // Drapeau de sécurité recommandé
-        )
-
-        // Construit et configure la notification
-        return NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle("GeoMoneyHide actif")  // Titre de la notification
-            .setContentText("Collecte de pièces en cours...")  // Description
-            .setSmallIcon(R.mipmap.ic_launcher)  // Icône dans la barre d'état
-            .setContentIntent(pendingIntent)  // Action au toucher
-            .build()
-    }
-
-    /**
-     * Méthode requise pour l'interface Service, mais non utilisée car ce n'est pas un service lié
-     * @return null car ce service n'est pas destiné à être lié
-     */
-    override fun onBind(intent: Intent?): IBinder? = null
-
-    /**
-     * Méthode appelée lors de la destruction du service
-     * Nettoie les ressources et arrête les mises à jour de localisation
-     */
-    override fun onDestroy() {
-        super.onDestroy()
-        // Arrête les mises à jour de localisation pour économiser la batterie
-        fusedLocationClient.removeLocationUpdates(locationCallback)
-    }
 
     companion object {
-        // Identificateur unique pour la notification
+        private const val TAG = "LocationService"
         private const val NOTIFICATION_ID = 12345
-
-        // Identificateur du canal de notification
         private const val CHANNEL_ID = "GeoMoneyHideChannel"
+
+        /**
+         * Démarre le service. Renvoie false si le système l'interdit
+         * (ex. ForegroundServiceStartNotAllowedException depuis l'arrière-plan, API 31+).
+         */
+        fun start(context: Context): Boolean = try {
+            ContextCompat.startForegroundService(context, Intent(context, LocationService::class.java))
+            true
+        } catch (e: IllegalStateException) {
+            // ForegroundServiceStartNotAllowedException hérite d'IllegalStateException
+            Log.w(TAG, "Démarrage du service refusé par le système", e)
+            false
+        } catch (e: SecurityException) {
+            Log.w(TAG, "Démarrage du service refusé (permission)", e)
+            false
+        }
+
+        fun stop(context: Context) {
+            context.stopService(Intent(context, LocationService::class.java))
+        }
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        GameRepository.init(this)
+        createNotificationChannel()
+
+        val type = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION
+        } else {
+            0
+        }
+        try {
+            ServiceCompat.startForeground(this, NOTIFICATION_ID, createNotification(), type)
+        } catch (e: RuntimeException) {
+            // SecurityException (permission manquante) ou refus du système (API 31+)
+            Log.w(TAG, "Passage au premier plan impossible", e)
+            stopSelf()
+            return
+        }
+
+        if (!LocationTracker.start(this, LocationTracker.Mode.BACKGROUND)) {
+            stopSelf()
+        }
+    }
+
+    // Pas de redémarrage automatique : l'activité relance le service quand elle passe en arrière-plan
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int = START_NOT_STICKY
+
+    override fun onBind(intent: Intent?): IBinder? = null
+
+    override fun onDestroy() {
+        LocationTracker.stop(LocationTracker.Mode.BACKGROUND)
+        GameRepository.flush()
+        super.onDestroy()
+    }
+
+    /** Canal de notification à faible importance (ni son ni vibration). */
+    private fun createNotificationChannel() {
+        val channel = NotificationChannel(
+            CHANNEL_ID,
+            getString(R.string.core_notification_channel_name),
+            NotificationManager.IMPORTANCE_LOW
+        ).apply {
+            description = getString(R.string.core_notification_channel_description)
+        }
+        getSystemService(NotificationManager::class.java)?.createNotificationChannel(channel)
+    }
+
+    private fun createNotification(): Notification {
+        val openApp = Intent(this, MapsActivity::class.java)
+            .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        val pendingIntent = PendingIntent.getActivity(this, 0, openApp, PendingIntent.FLAG_IMMUTABLE)
+
+        return NotificationCompat.Builder(this, CHANNEL_ID)
+            .setContentTitle(getString(R.string.core_notification_title))
+            .setContentText(getString(R.string.core_notification_text))
+            .setSmallIcon(R.drawable.ic_coin)
+            .setContentIntent(pendingIntent)
+            .setOngoing(true)
+            .setPriority(NotificationCompat.PRIORITY_LOW)
+            .setCategory(NotificationCompat.CATEGORY_SERVICE)
+            .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
+            .build()
     }
 }
-

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ===================== Formes ===================== -->
+    <style name="ShapeAppearance.GeoMoneyHide.Hud" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/hud_corner</item>
+    </style>
+
+    <style name="ShapeAppearance.GeoMoneyHide.Bar" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/bar_corner</item>
+    </style>
+
+    <style name="ShapeAppearance.GeoMoneyHide.Button" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/bar_button_corner</item>
+    </style>
+
+    <style name="ShapeAppearance.GeoMoneyHide.Fab" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/fab_corner</item>
+    </style>
+
+    <style name="ShapeAppearance.GeoMoneyHide.Sheet" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/sheet_corner</item>
+    </style>
+
+    <style name="ShapeAppearance.GeoMoneyHide.Snackbar" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/bar_button_corner</item>
+    </style>
+
+    <style name="ShapeAppearance.GeoMoneyHide.Tile" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/hud_tile_corner</item>
+    </style>
+
+    <!-- ===================== Typographie ===================== -->
+    <style name="TextAppearance.GeoMoneyHide.HudTitle" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:fontFamily">sans-serif-black</item>
+        <item name="fontFamily">sans-serif-black</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="TextAppearance.GeoMoneyHide.HudSubtitle" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:letterSpacing">0.06</item>
+    </style>
+
+    <style name="TextAppearance.GeoMoneyHide.CoinCounter" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:fontFamily">sans-serif-black</item>
+        <item name="fontFamily">sans-serif-black</item>
+        <item name="android:textColor">@color/gold_400</item>
+    </style>
+
+    <style name="TextAppearance.GeoMoneyHide.StatValue" parent="TextAppearance.Material3.TitleSmall">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="TextAppearance.GeoMoneyHide.StatLabel" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <style name="TextAppearance.GeoMoneyHide.CoinGain" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:fontFamily">sans-serif-black</item>
+        <item name="fontFamily">sans-serif-black</item>
+        <item name="android:textColor">@color/gold_400</item>
+    </style>
+
+    <style name="TextAppearance.GeoMoneyHide.SheetTitle" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="android:fontFamily">sans-serif-black</item>
+        <item name="fontFamily">sans-serif-black</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="TextAppearance.GeoMoneyHide.SheetSubtitle" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <style name="TextAppearance.GeoMoneyHide.SectionLabel" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:letterSpacing">0.08</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="TextAppearance.GeoMoneyHide.ItemTitle" parent="TextAppearance.Material3.TitleSmall">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="TextAppearance.GeoMoneyHide.ItemBody" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <!-- ===================== HUD ===================== -->
+    <style name="Widget.GeoMoneyHide.GlassCard" parent="Widget.Material3.CardView.Outlined">
+        <item name="cardBackgroundColor">@color/hud_glass</item>
+        <item name="strokeColor">@color/hud_stroke</item>
+        <item name="strokeWidth">@dimen/hud_stroke</item>
+        <item name="cardElevation">0dp</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.GeoMoneyHide.Hud</item>
+    </style>
+
+    <style name="Widget.GeoMoneyHide.GlassCard.Bar">
+        <item name="shapeAppearance">@style/ShapeAppearance.GeoMoneyHide.Bar</item>
+    </style>
+
+    <style name="Widget.GeoMoneyHide.BarButton" parent="Widget.Material3.Button.TonalButton">
+        <item name="backgroundTint">@color/hud_tile</item>
+        <item name="rippleColor">@color/hud_ripple</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textAppearance">@style/TextAppearance.Material3.LabelMedium</item>
+        <item name="android:minHeight">@dimen/bar_button_min_height</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:paddingTop">@dimen/space_s</item>
+        <item name="android:paddingBottom">@dimen/space_s</item>
+        <item name="android:paddingStart">@dimen/space_xs</item>
+        <item name="android:paddingEnd">@dimen/space_xs</item>
+        <item name="android:maxLines">1</item>
+        <item name="iconGravity">top</item>
+        <item name="iconSize">@dimen/bar_button_icon</item>
+        <item name="iconPadding">@dimen/space_xs</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.GeoMoneyHide.Button</item>
+    </style>
+
+    <style name="Widget.GeoMoneyHide.Fab" parent="Widget.Material3.FloatingActionButton.Primary">
+        <item name="backgroundTint">@color/gold_400</item>
+        <item name="tint">@color/text_on_gold</item>
+        <item name="rippleColor">@color/hud_ripple</item>
+        <item name="borderWidth">0dp</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.GeoMoneyHide.Fab</item>
+    </style>
+
+    <!-- ===================== Snackbar ===================== -->
+    <style name="Widget.GeoMoneyHide.Snackbar" parent="Widget.Material3.Snackbar">
+        <item name="backgroundTint">@color/night_700</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.GeoMoneyHide.Snackbar</item>
+        <item name="actionTextColorAlpha">1</item>
+    </style>
+
+    <style name="Widget.GeoMoneyHide.Snackbar.TextView" parent="Widget.Material3.Snackbar.TextView">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:maxLines">3</item>
+    </style>
+
+    <style name="Widget.GeoMoneyHide.Snackbar.Button" parent="Widget.Material3.Button.TextButton.Snackbar">
+        <item name="android:textColor">@color/gold_400</item>
+    </style>
+
+    <!-- ===================== Feuilles ===================== -->
+    <style name="Widget.GeoMoneyHide.BottomSheet" parent="Widget.Material3.BottomSheet.Modal">
+        <item name="backgroundTint">@color/night_800</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.GeoMoneyHide.Sheet</item>
+    </style>
+
+    <style name="Widget.GeoMoneyHide.Button.Primary" parent="Widget.Material3.Button">
+        <item name="android:minHeight">56dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.Material3.LabelLarge</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.GeoMoneyHide.Button</item>
+    </style>
+
+    <style name="Widget.GeoMoneyHide.Button.Text" parent="Widget.Material3.Button.TextButton">
+        <item name="android:minHeight">56dp</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.GeoMoneyHide.Button</item>
+    </style>
+
+    <style name="Widget.GeoMoneyHide.Chip" parent="Widget.Material3.Chip.Assist">
+        <item name="chipBackgroundColor">@color/hud_tile</item>
+        <item name="chipStrokeColor">@color/hud_stroke</item>
+        <item name="chipIconTint">@color/gold_400</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+</resources>
