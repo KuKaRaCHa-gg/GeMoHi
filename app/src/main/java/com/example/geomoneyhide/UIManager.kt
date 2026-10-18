@@ -33,6 +33,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
+import androidx.lifecycle.Lifecycle
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -315,7 +316,10 @@ class UIManager(
         }
 
         boostsContainer.isVisible = shouldShow
-        if (shouldShow) boostsContainer.postDelayed(boostTicker, TICK_MS)
+        // Pas de rafraîchissement quand l'écran n'est plus visible (relancé par MapsActivity.onResume)
+        if (shouldShow && activity.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
+            boostsContainer.postDelayed(boostTicker, TICK_MS)
+        }
     }
 
     // =====================================================================================

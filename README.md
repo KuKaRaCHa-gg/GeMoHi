@@ -4,11 +4,14 @@ GeoMoneyHide is a location-based Android game where players explore the real wor
 
 ## 🎮 Game Features
 
-- Explore the real world to discover new areas
-- Collect coins scattered across the map
-- Track your explored territory in km² and percentage of Earth's surface
-- Customize the color of your explored areas
-- Background location tracking for continuous play
+- Explore the real world: every 1 km × 1 km cell you walk into is colored on the map
+- Collect gold coins by walking within 20 m of them; discovering a new cell collects the coins inside it
+- Spend your coins in the **Marché** (shop):
+  - zone colors (and a free hue picker),
+  - map themes (Night, Classic, Retro, Neon),
+  - 30-minute boosts: **Magnet** (60 m collection radius) and **Double** (coins count ×2)
+- Track your explored surface in km², number of zones and percentage of Earth's surface
+- Background exploration through a foreground location service
 
 ## 📱 Installation
 
@@ -23,7 +26,7 @@ GeoMoneyHide is a location-based Android game where players explore the real wor
    - Create a project in the [Google Cloud Console](https://console.cloud.google.com/).
    - Enable the **Maps SDK for Android**.
    - Generate an API key.
-   - Add your API key to `local.properties`:
+   - Add your API key to `local.properties` (without it the app still builds, using the placeholder from `local.defaults.properties`, but the map stays blank):
      ```
      MAPS_API_KEY=your_api_key_here
      ```
@@ -45,117 +48,36 @@ GeoMoneyHide is a location-based Android game where players explore the real wor
 
 ## 📚 Project Architecture
 
-The application follows a modular approach with several key classes:
-
-### 📍 `GridManager`
-
-Handles the grid system for tracking explored territory:
-
-```kotlin
-class GridManager(private val gameState: GameState, private val map: GoogleMap)
-```
-
-- `GRID_SIZE` - Size of each grid cell (1000m)
-- `METERS_PER_DEGREE` - Conversion factor for coordinates to meters
-- `getCellId()` - Converts geographic coordinates to a unique grid cell ID
-- `getCellBounds()` - Calculates the four corners of a given cell
-- `drawExploredCell()` - Draws a cell on the map when explored
-- `updateCellColors()` - Updates colors of all cells when the user changes the color
-- `calculateExploredSurface()` - Calculates the total area explored
-
-### 💰 `PieceManager`
-
-Manages coin generation and collection:
-
-```kotlin
-class PieceManager(private val context: MapsActivity, private val gameState: GameState, 
-                  private val gridManager: GridManager, private val map: GoogleMap?)
-```
-
-- `spawnPiecesAroundUser()` - Generates coins near the player’s location
-- `checkCollectedPieces()` - Checks if the player is close enough to collect coins
-- `collectAllPiecesInCell()` - Collects all coins in a newly explored cell
-- `adjustPieceCount()` - Maintains the correct number of coins based on explored area
-
-### 🗺️ `LocationService`
-
-Background service that tracks the player’s location:
-
-```kotlin
-class LocationService : Service()
-```
-
-- Runs as a foreground service with a persistent notification
-- Continuously tracks location even when the app is in the background
-- Broadcasts location updates to the main app
-
-### 🎮 `GameState`
-
-Stores and manages all game data:
-
-```kotlin
-class GameState(private val context: Context)
-```
-
-- Tracks explored cells, collected coins, and player positions
-- Manages color preferences for explored areas
-- Handles data persistence with **SharedPreferences**
-
-### 🎨 `UIManager`
-
-Manages all user interface elements:
-
-```kotlin
-class UIManager(private val context: MapsActivity, private val gameState: GameState, 
-               private val gridManager: GridManager)
-```
-
-- `showColorPickerDialog()` - Allows customization of explored area colors
-- `showRulesDialog()` - Displays game rules
-- `showCreditsDialog()` - Shows app credits and information
-
-### 🏁 `MapsActivity`
-
-Main activity that ties everything together:
-
-```kotlin
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback
-```
-
-- Initializes the map and all managers
-- Handles permission requests
-- Manages the activity lifecycle
-- Processes location updates and updates the UI
+| File | Role |
+|---|---|
+| `GameRepository` | Single source of truth shared by the activity and the background service; debounced atomic saves, listeners |
+| `GameState` | Pure game rules: exploration, coins (max 25 active, within 3 km), wallet, shop purchases, boosts |
+| `GridMath` | Pure grid math: cell ids `"x:y"`, bounds, neighbours, distances (a position always lies inside its drawn cell) |
+| `SaveCodec` | JSON save format (versioned) and migration of old saves |
+| `ShopModel` | Shop catalog (`ShopCatalog`), items and purchase results |
+| `GridManager` | Draws explored cells on the map (only those near the visible area, max 1500 polygons) |
+| `PieceManager` | Coin markers, keyed by stable coin id |
+| `LocationTracker` | One location request at a time (foreground / background modes) |
+| `LocationService` | Foreground service for background exploration |
+| `UIManager` / `MarkerIcons` | Material 3 HUD, animations, shop / color / rules / credits bottom sheets, map styles, coin marker |
+| `MapsActivity` | Wires everything together, permissions, map lifecycle |
 
 ## 📋 Requirements
 
-- Android 6.0 (API level 23) or higher
-- Location permissions
+- Android 8.0 (API level 26) or higher
+- Location permissions (precise location to play; background location optional)
 - Google Play Services
-- Internet connection
 
-## 📝 Key Implementation Details
+## 🧪 Tests
 
-- The world is divided into 1km × 1km grid cells.
-- Each explored cell is saved with a unique ID in the format "x:y".
-- The app calculates and displays the percentage of Earth’s surface explored.
-- Location tracking continues in the background using a **Foreground Service**.
-- Coins are generated at a rate of approximately 3 per km² of explored area.
+```bash
+./gradlew testDebugUnitTest
+```
+
+Unit tests cover the grid math, game rules, shop and save migration.
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please follow these steps:
 1. Fork the repository.
 2. Create a new branch (`git checkout -b feature/your-feature-name`).
 3. Submit a Pull Request.
-
-
-
-
-
-### Notes :
-- J’ai repris votre contenu tel quel, en m’assurant qu’il est bien formaté pour GitHub.
-- Si vous voulez ajouter des sections (comme une capture d’écran, des instructions supplémentaires ou une FAQ), faites-le-moi savoir !
-- Si vous préférez une version en français, je peux la traduire intégralement.
-
-Qu’en pensez-vous ? Souhaitez-vous des ajustements ?
